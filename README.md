@@ -16,7 +16,7 @@ modify the config file to your liking and change config file name: ```cd tuyabac
 run the application: ```pipenv run python main.py```
 
 ## Configuration options
-default config:\
+default config:
 ```yml
 # logger path (default is .)
 log_path: ./log.log
