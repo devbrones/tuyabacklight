@@ -1,33 +1,45 @@
-import pyyaml
+import yaml
+import re
 class config:
     # configuration class
     raw = open("config.yml")
-    config = yaml.load(rawconfig, Loader=yaml.FullLoader)
-    log = str(config["log_path"])
-    def n_lights():
-        for n in config:
+    global mconfig
+    global nlight
+    mconfig = yaml.load(raw, Loader=yaml.FullLoader)
+    log = str(mconfig["log_path"])
+    print(type(mconfig))
+    def n_lights(self):
+        for n in mconfig:
             # find how many lights there are defined in the config. 
             # use regex. example = re.match(name, "device_[0-9][0-9][0-9]")
-            if re.match(config[n], "device_[0-9][0-9]"):
+            print(str(mconfig[n]))
+            if re.match(str(mconfig[n]), "device_[0-9]"):
                 nlight += 1
+            else:
+                print("error, no devices")
+                nlight = 2
+                break
         return nlight
 
-    def get(devn):
-        if str(config[str("device_" + str(devn))]):
-            return config[str("device_" + str(devn))]
+    def __init__(self):
+        devn = self
+
+    def get(self, devn):
+        if str(mconfig[str("device_" + str(devn))]):
+            return mconfig[str("device_" + str(devn))]
         else:
             return {"error":"nosuchdevice"}
-    def getuuid(devn):
-        infarr = get(devn)
+    def getuuid(self, devn):
+        infarr = self.get(devn)
         return infarr.get("dev_id")
-    def getip(devn):
-        infarr = get(devn)
+    def getip(self, devn):
+        infarr = self.get(devn)
         return infarr.get("ip")
-    def getpos(devn):
-        infarr = get(devn)
+    def getpos(self, devn):
+        infarr = self.get(devn)
         return infarr.get("screen_rel")
-    def getlk(devn):
-        infarr = get(devn)
+    def getlk(self, devn):
+        infarr = self.get(devn)
         return infarr.get("loc_key")
 
-    debug = bool(config["debug"])
+    debug = bool(mconfig["debug"])

@@ -1,1 +1,5 @@
 config.yml
+tinytuya.json
+devices.json
+tuya-raw.json
+snapshot.json
