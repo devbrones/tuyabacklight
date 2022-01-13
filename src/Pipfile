@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 tinytuya = "*"
+pyyaml = "*"
 
 [dev-packages]
 
