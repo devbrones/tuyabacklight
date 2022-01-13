@@ -4,6 +4,14 @@ import logging
 import re
 from config import config
 from device import device
+import struct
+import operator
+import Quartz.CoreGraphics as CG 
+import sys
+from pixelval import ScreenPixel
+
+global y  # defines the x and y coordinates from where we will capture colors
+global x  # 
 
 # logging
 log = logging.basicConfig(filename=config.log, level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
