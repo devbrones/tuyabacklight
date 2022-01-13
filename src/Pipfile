@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 tinytuya = "*"
 pyyaml = "*"
+pyobjc-framework-quartz = "*"
 
 [dev-packages]
 
