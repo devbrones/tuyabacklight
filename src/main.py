@@ -8,6 +8,7 @@ import numpy as np
 #import cv2
 from PIL import ImageGrab
 import statistics
+from findcolavg import averageColor
 
 global y  # defines the x and y coordinates from where we will capture colors
 global x  # 
@@ -24,6 +25,7 @@ for x in range(0, 3): # set up all devices in config as tuya bulbs
     print("setting up device " + str(x))
     lights.update({x : tinytuya.BulbDevice(config.getuuid(x), config.getip(x), config.getlk(x))})
     lights[x].set_version(3.3)
+    lights[x].turn_on()
     if config.debug: print("status of device_" + x + " is " + lights[x].status())
     lights[x].set_colour(50,255,50) # set color to green to show connection successfull.
     lights[x].set_brightness(500) # set half bright to show connection successfull.
@@ -56,17 +58,14 @@ while True:
         for x in range(0, 2560, step):
             px = im_arr[y][x]
             pixelArray.append([px[0], px[1], px[2]])
+    mostFrequentColor = averageColor(pixelArray)
 
-    mostFrequentColor = mostFrequent(pixelArray)
-    
     for x in range(0, 3):
-        #print(mostFrequentColor[0], mostFrequentColor[1], mostFrequentColor[2])
-        #print(type(mostFrequentColor[0]))
-        #lights[x].turn_on()
+        #
         lights[x].set_colour(mostFrequentColor[0], mostFrequentColor[1], mostFrequentColor[2])
         #lights[x].set_brightness(1000)
-    print(mostFrequentColor)
+    #print(mostFrequentColor)
 
-    count += 1
+    #count += 1
 
 
