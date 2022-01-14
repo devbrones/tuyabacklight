@@ -21,12 +21,12 @@ lights = {}
 
 config = config()
 
-for x in range(0, 3): # set up all devices in config as tuya bulbs
+for x in range(0, config.n_lights()): # set up all devices in config as tuya bulbs
     print("setting up device " + str(x))
     lights.update({x : tinytuya.BulbDevice(config.getuuid(x), config.getip(x), config.getlk(x))})
     lights[x].set_version(3.3)
     lights[x].turn_on()
-    if config.debug: print("status of device_" + x + " is " + lights[x].status())
+    if config.debug: print("status of device_" + str(x) + " is " + str(lights[x].status()))
     lights[x].set_colour(50,255,50) # set color to green to show connection successfull.
     lights[x].set_brightness(500) # set half bright to show connection successfull.
 

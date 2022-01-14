@@ -9,16 +9,8 @@ class config:
     log = str(mconfig["log_path"])
     print(type(mconfig))
     def n_lights(self):
-        for n in mconfig:
-            # find how many lights there are defined in the config. 
-            # use regex. example = re.match(name, "device_[0-9][0-9][0-9]")
-            print(str(mconfig[n]))
-            if re.match(str(mconfig[n]), "device_[0-9]"):
-                nlight += 1
-            else:
-                print("error, no devices")
-                nlight = 2
-                break
+        nlight = str(mconfig).count("device_")
+        print(nlight)
         return nlight
 
     def __init__(self):
